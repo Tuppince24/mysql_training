@@ -28,36 +28,36 @@ function landing(){
             message: "what would you like to do",
             choices: [
                 {
-                    value: "add_employee_department",
-                    message:"would you like to add employee department"
+                    name:"would you like to add department",
+                    value: "add_department"
                 },
                 {
-                    value: "add_employee_role",
-                    message:"would you like to add employee role"
+                    name:"would you like to add employee role",
+                    value: "add_employee_role"
                 },
                 {
-                    value: "add_employee",
-                    message:"would you like to add employee"
+                    name:"would you like to add employee",
+                    value: "add_employee"
                 },
                 {
-                    value: "update_employee",
-                    message: "would you like to update you employee"
+                  
+                    name: "would you like to update you employee",
+                    value: "update_employee_role"
+                    
                 },
                 {
-                    value: "update_employee_department",
-                    message: "would you like to view departments, roles, employees"
+                   
+                    name: "would you like to view departments, roles, employees"
                 },
                 {
-                    value: "update_employee_department",
-                    message: "would you like to view departments, roles, employees"
+                    name: "would you like to view departments, roles, employees"
                 },
                 {
-                    value: "update_employee_department",
-                    message: "would you like to view departments, roles, employees"
+                    name: "would you like to view departments, roles, employees"
                 },
                 {
-                    value: "",
-                    message: "would you like to delete department, role, and employee"
+                    name: "would you like to delete department, role, and employee"
+                     
                 }
             ]
         })
