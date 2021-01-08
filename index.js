@@ -27,22 +27,59 @@ function landing(){
             type: "rawlist",
             message: "what would you like to do",
             choices: [
-                "would you like to add department, roles, employee",
-                "would you like to update employee role",
-                "would you like to view departments, roles, employees",
-                "would you like to delete department, role, and employee"
+                {
+                    value: "add_employee_department",
+                    message:"would you like to add employee department"
+                },
+                {
+                    value: "add_employee_role",
+                    message:"would you like to add employee role"
+                },
+                {
+                    value: "add_employee",
+                    message:"would you like to add employee"
+                },
+                {
+                    value: "update_employee",
+                    message: "would you like to update you employee"
+                },
+                {
+                    value: "update_employee_department",
+                    message: "would you like to view departments, roles, employees"
+                },
+                {
+                    value: "update_employee_department",
+                    message: "would you like to view departments, roles, employees"
+                },
+                {
+                    value: "update_employee_department",
+                    message: "would you like to view departments, roles, employees"
+                },
+                {
+                    value: "",
+                    message: "would you like to delete department, role, and employee"
+                }
             ]
         })
+        .then(function(answer){
+            switch(answer.action.value){
+                case "would you like to add department, roles, employee":
+                    add();
+                    break;
+                case "would you like to update employee role":
+                    update();
+                    break;
+                case "would you like to view departments, roles, employees":
+                    view();
+                    break;
+                case "would you like to delete department, role, and employee":
+                    deleteDER();
+                    break;
+            }
+        });
 }
+console.log(landing());
+landing()
 
-function add(){
 
-}
 
-function update(){
-
-}
-
-function view(){
-
-}
