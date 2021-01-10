@@ -42,31 +42,56 @@ function landing(){
                 {
                   
                     name: "would you like to update you employee",
-                    value: "update_employee_role"
+                    value: "update_employee"
                     
                 },
                 {
-                   
-                    name: "would you like to view departments, roles, employees"
+                    name: "would you like to view departments",
+                    value: "update_department"
                 },
                 {
-                    name: "would you like to view departments, roles, employees"
+                    name: "would you like to view emplyoee roles",
+                    value: "update_employee_role"
                 },
                 {
-                    name: "would you like to view departments, roles, employees"
+                    name: "would you like to view departments, roles, employees",
+                    value: "update_department"
                 },
                 {
-                    name: "would you like to delete department, role, and employee"
+                    name: "would you like to view roles",
+                    value: "view_role"
+                },
+                {
+                    name: "would you like to view departments",
+                    value: "view_department"
+                },
+                {
+                    name: "would you like to view employee",
+                    value: "view_employee"
+                },
+                {
+                    name: "would you like to delete department",
+                    value: "delete_department"
+                     
+                },
+                {
+                    name: "would you like to delete role",
+                    value: "delete_employee_role"
+                     
+                },
+                {
+                    name: "would you like to delete employee",
+                    value: "delete_employee"
                      
                 }
             ]
         })
         .then(function(answer){
             switch(answer.action.value){
-                case "would you like to add department, roles, employee":
+                case "would you like to add department":
                     add();
                     break;
-                case "would you like to update employee role":
+                case "would you like to add employee role":
                     update();
                     break;
                 case "would you like to view departments, roles, employees":
@@ -79,7 +104,7 @@ function landing(){
         });
 }
 console.log(landing());
-landing()
+
 
 
 
