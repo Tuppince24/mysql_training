@@ -28,81 +28,105 @@ function landing(){
             message: "what would you like to do",
             choices: [
                 {
-                    name:"would you like to add department",
+                    name:"Add department",
                     value: "add_department"
                 },
                 {
-                    name:"would you like to add employee role",
+                    name:"Add employee role",
                     value: "add_employee_role"
                 },
                 {
-                    name:"would you like to add employee",
+                    name:"Add employee",
                     value: "add_employee"
                 },
                 {
                   
-                    name: "would you like to update you employee",
+                    name: "Update your employee",
                     value: "update_employee"
                     
                 },
                 {
-                    name: "would you like to view departments",
+                  
+                    name: "Update your department",
+                    value: "update_department"
+                    
+                },
+                {
+                  
+                    name: "Update your employee role",
+                    value: "update_employee_role"
+                    
+                },
+                {
+                    name: "View all departments",
                     value: "update_department"
                 },
                 {
-                    name: "would you like to view emplyoee roles",
+                    name: "View all emplyoee roles",
                     value: "update_employee_role"
                 },
                 {
-                    name: "would you like to view departments, roles, employees",
-                    value: "update_department"
-                },
-                {
-                    name: "would you like to view roles",
-                    value: "view_role"
-                },
-                {
-                    name: "would you like to view departments",
-                    value: "view_department"
-                },
-                {
-                    name: "would you like to view employee",
+                    name: "View all employee",
                     value: "view_employee"
                 },
                 {
-                    name: "would you like to delete department",
-                    value: "delete_department"
-                     
-                },
-                {
-                    name: "would you like to delete role",
+                    name: "Delete employee role",
                     value: "delete_employee_role"
                      
                 },
                 {
-                    name: "would you like to delete employee",
+                    name: "Delete employee",
                     value: "delete_employee"
+                     
+                },
+                {
+                    name: "Delete department",
+                    value: "delete_department"
                      
                 }
             ]
-        })
-        .then(function(answer){
-            switch(answer.action.value){
-                case "would you like to add department":
-                    add();
-                    break;
-                case "would you like to add employee role":
-                    update();
-                    break;
-                case "would you like to view departments, roles, employees":
-                    view();
-                    break;
-                case "would you like to delete department, role, and employee":
-                    deleteDER();
-                    break;
-            }
-        });
+    })
+    switch(choice){
+        case "add_department":
+            return addDepartment();
+        case "add_employee_role":
+            return addEmployeeRole();
+        case "add_employee":
+            return addEmployee();
+    }
+
+
+        
 }
+
+function addDepartment(){
+
+};
+function addEmployee(){
+
+};
+function addEmployeeRole(){
+
+};
+function updateDepartment(){
+
+};
+function updateEmployee(){
+
+};
+function updateEmployeeRole(){
+
+};
+function viewDepartment(){
+
+};
+function viewEmployee(){
+
+};
+function viewEmployeeRole(){
+
+}
+
 console.log(landing());
 
 
