@@ -59,11 +59,11 @@ function landing(){
                 },
                 {
                     name: "View all departments",
-                    value: "update_department"
+                    value: "view_department"
                 },
                 {
                     name: "View all emplyoee roles",
-                    value: "update_employee_role"
+                    value: "view_employee_role"
                 },
                 {
                     name: "View all employee",
@@ -93,6 +93,27 @@ function landing(){
             return addEmployeeRole();
         case "add_employee":
             return addEmployee();
+        case "update_employee":
+            return updateEmployee();
+        case "update_department":
+            return updateDepartment();
+        case "update_employee_role":
+            return updateEmployeeRole();
+        case "view_department":
+            return viewDepartment();
+        case "view_employee_role":
+            return viewEmployeeRole();
+        case "view_employee":
+            return viewEmployee();
+        case "delete_employee_role":
+            return deleteEmployeeRole();
+        case "delete_employee":
+            return deleteEmployee();
+        case "delete_department":
+            return deleteDepartment();
+        default:
+            return exit();
+        
     }
 
 
@@ -100,7 +121,10 @@ function landing(){
 }
 
 function addDepartment(){
-
+    inquirer
+     .prompt({
+         
+     })
 };
 function addEmployee(){
 
@@ -125,7 +149,25 @@ function viewEmployee(){
 };
 function viewEmployeeRole(){
 
-}
+};
+
+function deleteDepartment(){
+
+};
+
+function deleteEmployeeRole(){
+
+};
+
+function deleteEmployee(){
+
+};
+
+function exit(){
+    console.log("see ya!");
+    process.exit();
+};
+
 
 console.log(landing());
 
