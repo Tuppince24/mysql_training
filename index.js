@@ -123,17 +123,41 @@ function landing(){
 function addDepartment(){
     inquirer
      .prompt({
-         
+         name: "name",
+         type:"input",
+         message: "add a department"
      })
+     .then(function(department){
+        connection.query("INSERT INTO department SET ?", department);
+     })
+     landing();
 };
 function addEmployee(){
-
+    inquirer
+    .prompt({
+        name:"employee_first_last_name",
+        type: "input",
+        message: "what is your employee full name"
+    })
+    .then(function(employee){
+        connection.query("INSERT INTO employee SET ?", employee);
+    })
+    landing();
 };
 function addEmployeeRole(){
-
+    inquirer
+    .prompt({
+        name: "add_employee_role",
+        type: "input",
+        message: "add your an employee role"
+    })
+    .then(function(role){
+        connection.query("INSERT INTO employee_role SET ?", role);
+    })
+    landing();
 };
 function updateDepartment(){
-
+    inquirer
 };
 function updateEmployee(){
 
