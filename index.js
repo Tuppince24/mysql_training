@@ -17,7 +17,7 @@ var connection = mysql.createConnection({
   
 connection.connect(function(err) {
     if (err) throw err;
-    runSearch();
+    landing();
 });
 
 function landing(){
@@ -83,40 +83,46 @@ function landing(){
                     name: "Delete department",
                     value: "delete_department"
                      
+                },
+                {
+                    name: "exit",
+                    value: "exit"
                 }
             ]
-    })
-    switch(choice){
-        case "add_department":
-            return addDepartment();
-        case "add_employee_role":
-            return addEmployeeRole();
-        case "add_employee":
-            return addEmployee();
-        case "update_employee":
-            return updateEmployee();
-        case "update_department":
-            return updateDepartment();
-        case "update_employee_role":
-            return updateEmployeeRole();
-        case "view_department":
-            return viewDepartment();
-        case "view_employee_role":
-            return viewEmployeeRole();
-        case "view_employee":
-            return viewEmployee();
-        case "delete_employee_role":
-            return deleteEmployeeRole();
-        case "delete_employee":
-            return deleteEmployee();
-        case "delete_department":
-            return deleteDepartment();
-        default:
-            return exit();
-        
-    }
+    }).then(function(results){
+        console.log(results.action);
+        switch(results.action){
+            case "add_department":
+                return addDepartment();
+            case "add_employee_role":
+                return addEmployeeRole();
+            case "add_employee":
+                return addEmployee();
+            case "update_employee":
+                return updateEmployee();
+            case "update_department":
+                return updateDepartment();
+            case "update_employee_role":
+                return updateEmployeeRole();
+            case "view_department":
+                return viewDepartment();
+            case "view_employee_role":
+                return viewEmployeeRole();
+            case "view_employee":
+                return viewEmployee();
+            case "delete_employee_role":
+                return deleteEmployeeRole();
+            case "delete_employee":
+                return deleteEmployee();
+            case "delete_department":
+                return deleteDepartment();
+            default:
+                return exit();
+            
+        }
+    });
 
-
+    
         
 }
 
@@ -128,39 +134,142 @@ function addDepartment(){
          message: "add a department"
      })
      .then(function(department){
-        connection.query("INSERT INTO department SET ?", department);
+        connection.query("INSERT INTO department (department_name) values(?)", department.name);
+        console.log(department);
+        landing();
      })
-     landing();
+    
 };
 function addEmployee(){
     inquirer
-    .prompt({
-        name:"employee_first_last_name",
+    .prompt([{
+        name:"first_name",
         type: "input",
-        message: "what is your employee full name"
-    })
+        message: "what is your employee first name"
+    },{
+        name:"last_name",
+        type: "input",
+        message: "what is your employee last name"
+    },{
+        name:"role_id",
+        type: "input",
+        message: "what is your employee role id"
+    },{
+        name:"manerger_id",
+        type: "input",
+        message: "what is your employee manerger id"
+    }
+    ])
+
     .then(function(employee){
-        connection.query("INSERT INTO employee SET ?", employee);
+        connection.query("INSERT INTO employee (first_name, last_name, role_id, manerger_id) values(?,?,?,?)", 
+        [employee.first_name, employee.last_name, employee.role_id, employee.manerger_id],function(err, results){
+            if (err){
+                console.log(err);
+            }
+
+            console.log(results);
+            landing();
+        });
+        
     })
-    landing();
+    
 };
 function addEmployeeRole(){
     inquirer
-    .prompt({
-        name: "add_employee_role",
+    .prompt([{
+        name:"title",
         type: "input",
-        message: "add your an employee role"
+        message: "what is your employee tittle"
+    },{
+        name:"salary",
+        type: "input",
+        message: "what is your employee salary"
+    },{
+        name:"department_id",
+        type: "input",
+        message: "what is your employee department id"
+    }
+    ])
+
+    .then(function(employee){
+        connection.query("INSERT INTO employee_role (title, salary, department_id) values(?,?,?)", 
+        [employee.title, employee.salary, employee.department_id],function(err, results){
+            if (err){
+                console.log(err);
+            }
+
+            console.log(results);
+            landing();
+        });
+        
     })
-    .then(function(role){
-        connection.query("INSERT INTO employee_role SET ?", role);
-    })
-    landing();
+    
 };
 function updateDepartment(){
     inquirer
+    .prompt([{
+        name:"id",
+        type: "input",
+        message: "what the id of the department you want to update"
+    },
+    {
+        name:"department_name",
+        type: "input",
+        message: "update department your department name"
+    }
+    ])
+
+    .then(function(employee){
+        connection.query("UPDATE employee SET department_name=? WHERE id =?  ", 
+        [employee.department_name, employee.id],function(err, results){
+            if (err){
+                console.log(err);
+            }
+
+            console.log(results);
+            landing();
+        });
+        
+    })
 };
 function updateEmployee(){
+    inquirer
+    .prompt([{
+        name:"first_name",
+        type: "input",
+        message: "Update your employee first name"
+    },{
+        name:"last_name",
+        type: "input",
+        message: "Update your employee last name"
+    },{
+        name:"role_id",
+        type: "input",
+        message: "Update your employee role id"
+    },{
+        name:"manerger_id",
+        type: "input",
+        message: "Update your employee manerger id"
+    },{
+        name:"id",
+        type: "input",
+        message: "Update your employee id"
+    }
+    ])
 
+    .then(function(employee){
+        connection.query("UPDATE employee SET first_name=?, last_name=?, role_id=?, manerger_id=? WHERE id =?  ", 
+        [employee.first_name, employee.last_name, employee.role_id, employee.manerger_id, employee.id],function(err, results){
+            if (err){
+                console.log(err);
+            }
+
+            console.log(results);
+            landing();
+        });
+        
+    })
 };
 function updateEmployeeRole(){
 
@@ -169,7 +278,18 @@ function viewDepartment(){
 
 };
 function viewEmployee(){
+    
+        connection.query("SELECT * FROM employee" 
+        ,function(err, results){
+            if (err){
+                console.log(err);
+            }
 
+            console.table(results);
+            landing();
+        });
+        
+    
 };
 function viewEmployeeRole(){
 
@@ -184,7 +304,24 @@ function deleteEmployeeRole(){
 };
 
 function deleteEmployee(){
+    inquirer
+    .prompt({
+        name:"first_name",
+        type: "input",
+        message: "delete your employee by id"
+    })
+    .then(function(employee){
+        connection.query("DELETE FROM employee WHERE id =? ", 
+        [employee.first_name, employee.last_name, employee.role_id, employee.manerger_id, employee.id],function(err, results){
+            if (err){
+                console.log(err);
+            }
 
+            console.log(results);
+            landing();
+        });
+        
+    })
 };
 
 function exit(){
@@ -193,7 +330,7 @@ function exit(){
 };
 
 
-console.log(landing());
+
 
 
 
