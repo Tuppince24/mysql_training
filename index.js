@@ -350,9 +350,9 @@ function deleteDepartment(){
         type: "input",
         message: "delete your department by id"
     })
-    .then(function(employee){
-        connection.query("DELETE FROM employee WHERE id =? ", 
-        [employee.first_name, employee.last_name, employee.role_id, employee.manerger_id, employee.id],function(err, results){
+    .then(function(department){
+        connection.query("DELETE FROM department WHERE id =? ", 
+        [department.id],function(err, results){
             if (err){
                 console.log(err);
             }
@@ -394,7 +394,7 @@ function deleteEmployee(){
     })
     .then(function(employee){
         connection.query("DELETE FROM employee WHERE id =? ", 
-        [employee.first_name, employee.last_name, employee.role_id, employee.manerger_id, employee.id],function(err, results){
+        [employee.id],function(err, results){
             if (err){
                 console.log(err);
             }
