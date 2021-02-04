@@ -135,7 +135,7 @@ function addDepartment(){
      })
      .then(function(department){
         connection.query("INSERT INTO department (department_name) values(?)", department.name);
-        console.log(department);
+        console.log("added department " +department);
         landing();
      })
     
@@ -168,7 +168,7 @@ function addEmployee(){
                 console.log(err);
             }
 
-            console.log(results);
+            console.log("added employee " + results);
             landing();
         });
         
@@ -199,7 +199,7 @@ function addEmployeeRole(){
                 console.log(err);
             }
 
-            console.log(results);
+            console.log( " added employee role " +results);
             landing();
         });
         
@@ -219,15 +219,14 @@ function updateDepartment(){
         message: "update department your department name"
     }
     ])
-
-    .then(function(employee){
-        connection.query("UPDATE employee SET department_name=? WHERE id =?  ", 
-        [employee.department_name, employee.id],function(err, results){
+    .then(function(department){
+        connection.query("UPDATE department SET department_name=?  WHERE id =?  ", 
+        [department.department_name, department.id],function(err, results){
             if (err){
                 console.log(err);
             }
 
-            console.log(results);
+            console.log("updated employee " + results);
             landing();
         });
         
@@ -235,7 +234,12 @@ function updateDepartment(){
 };
 function updateEmployee(){
     inquirer
-    .prompt([{
+    .prompt([
+        {
+            name:"id",
+            type: "input",
+            message: "Update your employee their id"
+        },{
         name:"first_name",
         type: "input",
         message: "Update your employee first name"
@@ -251,10 +255,6 @@ function updateEmployee(){
         name:"manerger_id",
         type: "input",
         message: "Update your employee manerger id"
-    },{
-        name:"id",
-        type: "input",
-        message: "Update your employee id"
     }
     ])
 
@@ -265,48 +265,130 @@ function updateEmployee(){
                 console.log(err);
             }
 
-            console.log(results);
+            console.log("updated employee " + results);
             landing();
         });
         
     })
 };
 function updateEmployeeRole(){
+    inquirer
+    .prompt([
+    {
+        name:"id",
+        type: "input",
+        message: "Update your employee role by id"
+    },{
+        name:"title",
+        type: "input",
+        message: "what is your employee tittle"
+    },{
+        name:"salary",
+        type: "input",
+        message: "what is your employee salary"
+    },{
+        name:"department_id",
+        type: "input",
+        message: "what is your employee department id"
+    }
+    ])
 
-};
-function viewDepartment(){
-
-};
-function viewEmployee(){
-    
-        connection.query("SELECT * FROM employee" 
-        ,function(err, results){
+    .then(function(employeeRole){
+        connection.query("UPDATE employee_role SET title=?, salary=?, department_id=? WHERE id =?", 
+        [employeeRole.title, employeeRole.salary, employeeRole.department_id, employeeRole.id],function(err, results){
             if (err){
                 console.log(err);
             }
 
-            console.table(results);
+            console.log("updated employee " + results);
             landing();
         });
+        
+    })
+};
+function viewDepartment(){
+    connection.query("SELECT * FROM department" 
+    ,function(err, results){
+        if (err){
+            console.log(err);
+        }
+
+        console.table(results);
+        landing();
+    });
+};
+function viewEmployee(){
+    
+    connection.query("SELECT * FROM employee" 
+    ,function(err, results){
+        if (err){
+            console.log(err);
+        }
+
+        console.table(results);
+        landing();
+    });
         
     
 };
 function viewEmployeeRole(){
+    connection.query("SELECT * FROM employee_role" 
+    ,function(err, results){
+        if (err){
+            console.log(err);
+        }
 
+        console.table(results);
+        landing();
+    });
 };
 
 function deleteDepartment(){
+    inquirer
+    .prompt({
+        name:"id",
+        type: "input",
+        message: "delete your department by id"
+    })
+    .then(function(employee){
+        connection.query("DELETE FROM employee WHERE id =? ", 
+        [employee.first_name, employee.last_name, employee.role_id, employee.manerger_id, employee.id],function(err, results){
+            if (err){
+                console.log(err);
+            }
 
+            console.log(" deleted department"  + results);
+            landing();
+        });
+        
+    })
 };
 
 function deleteEmployeeRole(){
+    inquirer
+    .prompt({
+        name:"id",
+        type: "input",
+        message: "delete your employee role by id"
+    })
+    .then(function(employee){
+        connection.query("DELETE FROM employee_role WHERE id =? ", 
+        [employee.id],function(err, results){
+            if (err){
+                console.log(err);
+            }
 
+            console.log("deleted employee role " + results);
+            landing();
+        });
+        
+    })
 };
 
 function deleteEmployee(){
     inquirer
     .prompt({
-        name:"first_name",
+        name:"id",
         type: "input",
         message: "delete your employee by id"
     })
@@ -317,7 +399,7 @@ function deleteEmployee(){
                 console.log(err);
             }
 
-            console.log(results);
+            console.log("deleted employee " + results);
             landing();
         });
         
